@@ -2,7 +2,7 @@ import React from "react";
 import { minutesToDuration, secondsToDuration } from "../utils/duration";
 export default Session;
 
-function Session({ session, currentDuration }) {
+function Session({ session, sessionDuration }) {
   if (!session) return null;
 
   return (
@@ -13,7 +13,7 @@ function Session({ session, currentDuration }) {
           {/* TODO: Update message below to include current session (Focusing or On Break) total duration */}
           <h2 data-testid="session-title">
             {/* if session is null do nothing, else access label property*/}
-            {session?.label} for {minutesToDuration(currentDuration)} minutes
+            {session?.label} for {minutesToDuration(sessionDuration)} minutes
           </h2>
           {/* TODO: Update message below correctly format the time remaining in the current session */}
           <p className="lead" data-testid="session-sub-title">
@@ -30,11 +30,11 @@ function Session({ session, currentDuration }) {
               aria-valuemin="0"
               aria-valuemax="100"
               aria-valuenow={
-                100 - (100 * session?.timeRemaining) / (currentDuration * 60)
+                100 - (100 * session?.timeRemaining) / (sessionDuration * 60)
               } // TODO: Increase aria-valuenow as elapsed time increases
               style={{
                 width: `${
-                  100 - (100 * session?.timeRemaining) / (currentDuration * 60)
+                  100 - (100 * session?.timeRemaining) / (sessionDuration * 60)
                 }%`,
               }} // TODO: Increase width % as elapsed time increases
             />

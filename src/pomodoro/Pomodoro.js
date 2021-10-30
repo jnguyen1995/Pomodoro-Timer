@@ -80,6 +80,8 @@ function Pomodoro() {
     isTimerRunning ? 1000 : null
   );
 
+  const sessionDuration =
+    session?.label === "Focusing" ? focusDuration : breakDuration;
   /**
    * Called whenever the play/pause button is clicked.
    */
@@ -100,12 +102,7 @@ function Pomodoro() {
         setSession={setSession}
         focusDuration={focusDuration}
       />
-      <Session
-        session={session}
-        currentDuration={
-          session?.label === "Focusing" ? focusDuration : breakDuration
-        }
-      />
+      <Session session={session} sessionDuration={sessionDuration} />
     </div>
   );
 }
